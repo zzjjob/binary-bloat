@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import os
 import sys
@@ -75,6 +75,7 @@ elif mode == "sections":
         os.system("%s -h %s > %s"%(objdump, inputfile, objdump_out))
     else:
         print(">> Use cached %s"%(objdump_out))
+# nm -C -S -l /path/to/binary > nm.out
 elif mode == "dump":
     if opts.force or (not os.path.isfile(nm_out) or inputfile_modify):
         print(">> Wait generator %s"%(nm_out))
@@ -85,6 +86,9 @@ elif mode == "dump":
 
 # bloat.py --strip-prefix=./ syms > bloat.json
 print(">> Wait generator %s"%(openfile))
+# print nm_out
+# print objdump_out
+# print mode
 os.system("./bloat.py \
 	--nm-output=%s \
 	--objdump-output=%s \
